@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:00:25 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/18 15:06:57 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/18 15:32:58 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,38 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->energyPoints > 0)
+	if (this->energyPoints > 0 && this->hitPoints > 0)
 	{
-		std::cout << this->name << " attacks " << target << " causing " << this->attackDamage << " points of damage to " << target << std::endl;
+		std::cout << "\033[36m" << this->name << " attacks " << target << " causing " << this->attackDamage << " points of damage to " << target << "\033[0m" << std::endl;
 		this->energyPoints--;
 	}
 	else
-		std::cout << this->name << " has no energy points left to attack! :(" << std::endl;
+		std::cout << "\033[33m" << this->name << " has no energy points left to attack! :(" << "\033[0m" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << this->name << " took " << amount << " points of damage! :(" << std::endl;
-	if (this->hitPoints > 0)
+	std::cout << "\033[31m" << this->name << " took " << amount << " points of damage! :(" << "\033[0m" << std::endl;
+	if (this->hitPoints > amount)
+		this->hitPoints -= amount;
+	else if (this->hitPoints > 0)
 		this->hitPoints -= amount;
 	else
-		std::cout << this->name << " is broken" << std::endl;
+		std::cout << "\033[32m" << "ClapTrap is broken! " << "\033[0m" << "\u2620 " << std::endl;
+
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->energyPoints > 0)
 	{
-		std::cout << this->name << " repaired itself and gained " << amount << " points with cost of 1 energy point!" << std::endl;
+		std::cout << "\033[35m" << this->name << " repaired itself and gained " << amount << " points with cost of 1 energy point!" << "\033[0m" << std::endl;
 		this->energyPoints--;
 		this->hitPoints += amount;
 	}
 	else
 		std::cout << this->name << " has no energy points left to repair itself! :(" << std::endl;
 }
-
-
-
-
 
 
 
