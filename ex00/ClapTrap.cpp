@@ -6,16 +6,21 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:00:25 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/18 14:21:25 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/18 15:06:57 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(): name("Default"), hitPoints(10), energyPoints(10), attackDamage(0)
+{
+	std::cout << "Default constructor called." << std::endl;
+}
+
 ClapTrap::ClapTrap(const std::string& setName)
 	: name(setName), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Constructor with name called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -54,7 +59,10 @@ void ClapTrap::attack(const std::string& target)
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << this->name << " took " << amount << " points of damage! :(" << std::endl;
-	this->hitPoints -= amount;
+	if (this->hitPoints > 0)
+		this->hitPoints -= amount;
+	else
+		std::cout << this->name << " is broken" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
