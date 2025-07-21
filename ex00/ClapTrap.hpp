@@ -6,28 +6,27 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:00:27 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/18 14:45:23 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/21 14:53:05 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
-#define CLATRAP_HPP
+#define CLAPTRAP_HPP
 
 #include <iostream>
 
-class	ClapTrap
-{
+class	ClapTrap {
 	private:
-		const std::string name;
-		unsigned int	hitPoints;
-		unsigned int	energyPoints;
-		unsigned int	attackDamage;
+		const std::string	_name;
+		unsigned int		_hitPoints = 10;
+		unsigned int		_energyPoints = 10;
+		unsigned int		_attackDamage = 5;
 	public:
-		ClapTrap(const std::string& name);
 		ClapTrap();
 		~ClapTrap();
-		ClapTrap(const ClapTrap& other);
-		ClapTrap& operator=(const ClapTrap& other);
+		ClapTrap(const std::string &setName);
+		ClapTrap(const ClapTrap &other);
+		ClapTrap& operator=(const ClapTrap &other);
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);

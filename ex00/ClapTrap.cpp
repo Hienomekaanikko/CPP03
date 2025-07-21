@@ -6,111 +6,81 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:00:25 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/18 15:32:58 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/21 14:52:06 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(): name("Default"), hitPoints(10), energyPoints(10), attackDamage(0)
-{
-	std::cout << "Default constructor called." << std::endl;
+ClapTrap::ClapTrap(){
+	std::cout << "Default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& setName)
-	: name(setName), hitPoints(10), energyPoints(10), attackDamage(0)
-{
-	std::cout << "Constructor with name called" << std::endl;
-}
-
-ClapTrap::~ClapTrap()
-{
+ClapTrap::~ClapTrap(){
 	std::cout << "Destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& other)
-	: name(other.name), hitPoints(other.hitPoints), energyPoints(other.energyPoints), attackDamage(other.attackDamage)
-{
+ClapTrap::ClapTrap(const std::string &setName): _name(setName){
+	std::cout << "Constructor with name called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage), _hitPoints(other._hitPoints){
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& other)
-{
+ClapTrap& ClapTrap::operator=(const ClapTrap &other){
+	std::cout << "Copy assignment operator called" << std::endl;
 	if (this == &other)
 		return *this;
-	this->hitPoints = other.hitPoints;
-	this->energyPoints = other.energyPoints;
-	this->attackDamage = other.attackDamage;
-	std::cout << "Copy assignment constructor called." << std::endl;
+	this->_attackDamage = other._attackDamage;
+	this->_energyPoints = other._energyPoints;
+	this->_hitPoints = other._hitPoints;
 	return *this;
 }
 
-void ClapTrap::attack(const std::string& target)
-{
-	if (this->energyPoints > 0 && this->hitPoints > 0)
-	{
-		std::cout << "\033[36m" << this->name << " attacks " << target << " causing " << this->attackDamage << " points of damage to " << target << "\033[0m" << std::endl;
-		this->energyPoints--;
+void	ClapTrap::attack(const std::string& target){
+	if (_energyPoints > 0){
+		std::cout << "💥 " << _name << ": attacks " << target << ", causing " << _attackDamage << " points of damage! 💥" << std::endl;
+		_energyPoints--;
+		std::cout << "🔋 " << _name << ": -1 energy points, " << _energyPoints << " energy points left. 🔋" << std::endl;
 	}
 	else
-		std::cout << "\033[33m" << this->name << " has no energy points left to attack! :(" << "\033[0m" << std::endl;
+		std::cout << "💔 " << _name << "No energy points left to attack! 💔"<< std::endl;
 }
 
-void ClapTrap::takeDamage(unsigned int amount)
-{
-	std::cout << "\033[31m" << this->name << " took " << amount << " points of damage! :(" << "\033[0m" << std::endl;
-	if (this->hitPoints > amount)
-		this->hitPoints -= amount;
-	else if (this->hitPoints > 0)
-		this->hitPoints -= amount;
-	else
-		std::cout << "\033[32m" << "ClapTrap is broken! " << "\033[0m" << "\u2620 " << std::endl;
+void ClapTrap::takeDamage(unsigned int amount) {
+	if (_hitPoints == 0) {
+		std::cout << "🔥 " << _name << ": is already broken! 🔥" << std::endl;
+		return;
+	}
 
+	if (amount >= _hitPoints) {
+		_hitPoints = 0;
+		std::cout << "💔🔥 " << _name << ": took " << amount << " pts of damage and broke down! 💔🔥" << std::endl;
+	} else {
+		_hitPoints -= amount;
+		std::cout << "💔 " << _name << ": took " << amount << " pts of damage! " << _hitPoints << " hit points left. 💔" << std::endl;
+	}
 }
 
-void ClapTrap::beRepaired(unsigned int amount)
-{
-	if (this->energyPoints > 0)
-	{
-		std::cout << "\033[35m" << this->name << " repaired itself and gained " << amount << " points with cost of 1 energy point!" << "\033[0m" << std::endl;
-		this->energyPoints--;
-		this->hitPoints += amount;
+void	ClapTrap::beRepaired(unsigned int amount){
+	if (_energyPoints > 0){
+		_hitPoints += amount;
+		_energyPoints--;
+		std::cout << "🛠️  " << _name << ": repaired itself and restored " << amount << " hit points! 🛠️" << std::endl;
+		std::cout << "🔋 " << _name << ": repair cost: -1 energy point! 🔋" << std::endl;
 	}
 	else
-		std::cout << this->name << " has no energy points left to repair itself! :(" << std::endl;
+		std::cout << "💔 " << _name << ": No more energy points for repairs 💔" << std::endl;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // // Step 1: Self-assignment check
-    // if (this == &other) {
-    //     return *this; // If the same object, return *this (no changes made)
-    // }
-
-    // // Step 2: Copy data members
-    // this->hitPoints = other.hitPoints;
-    // this->energyPoints = other.energyPoints;
-    // this->attackDamage = other.attackDamage;
-
-    // // Note: `name` is a `const std::string`, so it will be automatically handled by assignment
-    // // as strings manage their own memory (no need to worry about deletion).
-
-    // // Step 3: Return *this to allow assignment chaining
-    // return *this;
+// When ClapTrack attacks, it causes its target to lose <attack damage> hit points.
+// When ClapTrap repairs itself, it gets <amount> hit points back. Attacking and repairing
+// cost 1 energy point each. Of course, ClapTrap can’t do anything if it has no hit points
+// or energy points left.
+// In all of these member functions, you have to print a message to describe what happens. For example, the attack() function may display something like (of course, without
+// the angle brackets):
+// ClapTrap <name> attacks <target>, causing <damage> points of damage!
+// The constructors and destructor must also display a message, so your peer-evaluators
+// can easily see they have been called.
+// Implement and turn in your own tests to ensure your code works as expected
