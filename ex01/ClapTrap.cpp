@@ -6,26 +6,26 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:00:25 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/21 14:52:06 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/22 10:46:03 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(){
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called on ClapTrap" << std::endl;
 }
 
 ClapTrap::~ClapTrap(){
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called on ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string &setName): _name(setName){
-	std::cout << "Constructor with name called" << std::endl;
+	std::cout << "Constructor with name called ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage), _hitPoints(other._hitPoints){
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called on ClapTrap" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other){

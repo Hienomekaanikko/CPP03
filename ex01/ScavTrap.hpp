@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:03:35 by msuokas           #+#    #+#             */
-/*   Updated: 2025/07/21 15:40:05 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/07/22 10:45:03 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class ScavTrap: public ClapTrap {
 	public:
 		ScavTrap();
 		virtual ~ScavTrap();
+		ScavTrap(const std::string &setName);
 		ScavTrap(const ScavTrap &other);
 		ScavTrap& operator=(const ScavTrap &other);
 		void guardGate();
