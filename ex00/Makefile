@@ -1,5 +1,5 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++20
 SRC = ClapTrap.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 NAME = claptrap
