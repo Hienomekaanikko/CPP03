@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:34:59 by msuokas           #+#    #+#             */
-/*   Updated: 2025/09/05 11:57:46 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/09/05 13:47:18 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 class ClapTrap {
-	private:
+	protected:
 		std::string _Name;
 		int _HitPoints;
 		int _EnergyPoints;
