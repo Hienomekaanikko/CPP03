@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 16:35:01 by msuokas           #+#    #+#             */
-/*   Updated: 2025/09/05 15:44:51 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/09/05 16:50:49 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	ScavTrap st("Tero");
 	FragTrap ft("Raimo");
 
-	std::cout << "\033[1;32m\nJaska attacks Tero and Raimo test (0 damage caused):\n\n\033[0m";
+	std::cout << "\033[1;32m\n\nJaska attacks Tero and Raimo test (0 damage caused):\n\n\033[0m";
 	ct.attack("Tero");
 	ft.attack("Raimo");
 	st.takeDamage(0);
