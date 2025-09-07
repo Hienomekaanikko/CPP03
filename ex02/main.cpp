@@ -23,7 +23,7 @@ int	main(void)
 
 	std::cout << "\033[1;32m\nJaska attacks Tero and Raimo test (0 damage caused):\n\n\033[0m";
 	ct.attack("Tero");
-	ft.attack("Raimo");
+	st.attack("Raimo");
 	st.takeDamage(0);
 	ft.takeDamage(0);
 	std::cout << "-------------------------\n";
@@ -37,7 +37,7 @@ int	main(void)
 	ct.takeDamage(20);
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nJaska repair test:\n\n\033[0m";
+	std::cout << "\033[1;32m\nJaska repair test (should have no energy hit points left for that):\n\n\033[0m";
 	ct.beRepaired(10);
 	std::cout << "-------------------------\n";
 
@@ -61,22 +61,25 @@ int	main(void)
 	ft.highFivesGuys();
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nRaimo getting fixed to be able to throw high five:\n\n\033[0m";
+	std::cout << "\033[1;32m\nRaimo trying to get fixed (no points left so not possible):\n\n\033[0m";
 	ft.beRepaired(100);
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nRaimo high five guys test with hit points: (it's just a print, nothing else)\n\n\033[0m";
-	ft.highFivesGuys();
+	std::cout << "\033[1;32m\nCreating a fragtrap Pentti to try the high five (it's just a print, nothing else)\n\n\033[0m";
+	FragTrap pena("Pentti");
+	pena.highFivesGuys();
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nCopy constructor test ('copy' gets the values of 'Raimo'):\n\n\033[0m";
-	FragTrap copy(ft);
+	std::cout << "\033[1;32m\nCopy constructor test ('copy' gets the values of 'Pentti'):\n\n\033[0m";
+	FragTrap copy(pena);
 
-	std::cout << "\033[1;32m\nCopy attacking test:\n\n\033[0m";
-	copy.attack("Test");
+	std::cout << "\033[1;32m\nPost copy constructor high five test:\n\n\033[0m";
+	copy.highFivesGuys();
 
-	std::cout << "\033[1;32m\nCopy assignment operator test ('copy' gets the values of 'Raimo'):\n\n\033[0m";
+	std::cout << "\033[1;32m\nCopy assignment operator test ('Pentti' gets the values of 'Raimo'):\n\n\033[0m";
 	copy = ft;
-	copy.attack("Test");
+
+	std::cout << "\033[1;32m\nPost copy assignment high five test:\n\n\033[0m";
+	copy.highFivesGuys();
 	std::cout << "-------------------------\n";
 }

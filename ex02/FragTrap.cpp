@@ -12,12 +12,15 @@
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() {
-	std::cout << "FragTrap: Constructor called without a name" << std::endl;
+FragTrap::FragTrap() : ClapTrap() {
+	std::cout << "Default constructor called on FragTrap " << _Name << std::endl;
+	_HitPoints = 100;
+	_EnergyPoints = 100;
+	_AttackDamage = 30;
 }
 
-FragTrap::FragTrap(const std::string& name) {
-	std::cout << "FragTrap: Constructor with name " << name << " called";
+FragTrap::FragTrap(const std::string& name): ClapTrap(name){
+	std::cout << "Constructor called on FragTrap " << name << std::endl;
 	_Name = name;
 	_HitPoints = 100;
 	_EnergyPoints = 100;
@@ -25,24 +28,24 @@ FragTrap::FragTrap(const std::string& name) {
 }
 
 FragTrap::~FragTrap() {
-	std::cout << "FragTrap: Destructor called on " << _Name << std::endl;
+	std::cout << "Destructor called on FragTrap " << _Name << std::endl;
 }
 
 void FragTrap::highFivesGuys(void) {
-	if (_HitPoints > 0)
-		std::cout << "FragTrap: " << _Name << ": Gimme a high five !" << std::endl;
+	if (_HitPoints > 0 && _EnergyPoints > 0)
+		std::cout << "FragTrap " << _Name << ": Gimme a high five !" << std::endl;
 	else
-		std::cout << "FragTrap: " << _Name << ": is too broken to give a high five :(\n";
+		std::cout << "FragTrap " << _Name << " has no more hit points or energy points left :(\n";
 }
 
 FragTrap::FragTrap(const FragTrap& other): ClapTrap(other) {
-	std::cout << "FragTrap: " << _Name << ": copy constructor called." << std::endl;
+	std::cout << "Copy constructor called on FragTrap " << other._Name << std::endl;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& other) {
 	if (this != &other) {
+		std::cout << "Copy assignment operator called: FragTrap " << _Name << " is now " << other._Name << std::endl;
 		ClapTrap::operator=(other);
-		std::cout << "FragTrap: " << _Name << ": copy assignment operator called." << std::endl;
 	}
 	return *this;
 }
