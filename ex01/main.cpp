@@ -18,6 +18,7 @@ int	main(void)
 	std::cout << "-------------------------\n\n";
 	ClapTrap ct1("Jaska");
 	ScavTrap st2("Tero");
+	ScavTrap st3("George");
 
 	std::cout << "\033[1;32m\nJaska attacks Tero test (0 damage):\n\n\033[0m";
 	ct1.attack("Tero");
@@ -49,22 +50,25 @@ int	main(void)
 	st2.beRepaired(100);
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nTero trying to attack after being fixed:\n\n\033[0m";
-	st2.attack("Jaska");
+	std::cout << "\033[1;32m\nTero tries guardGate mode while broken:\n\n\033[0m";
+	st2.guardGate();
 	std::cout << "-------------------------\n";
 
-	std::cout << "\033[1;32m\nTero guardGate mode test: (it's just a print, nothing else)\n\n\033[0m";
-	st2.guardGate();
+	std::cout << "\033[1;32m\nCreating ScavTrap Jussi to try guardGate mode:\n\n\033[0m";
+
+	ScavTrap jupe("Jussi");
+	std::cout << "\033[1;32m\nJussi guardGate mode test: (it's just a print, nothing else)\n\n\033[0m";
+	jupe.guardGate();
 	std::cout << "-------------------------\n";
 
 	std::cout << "\033[1;32m\nCopy constructor test ('copy' gets the values of 'Tero'):\n\n\033[0m";
 	ScavTrap copy(st2);
 
-	std::cout << "\033[1;32m\nCopy attacking test:\n\n\033[0m";
+	std::cout << "\033[1;32m\nCopy attacking test (attacking party should be ScavTrap 'Tero' with no points to attack with):\n\n\033[0m";
 	copy.attack("Test");
 
-	std::cout << "\033[1;32m\nCopy assignment operator test ('copy' gets the values of 'Tero'):\n\n\033[0m";
-	copy = st2;
-	copy.attack("Test");
+	std::cout << "\033[1;32m\nCopy assignment operator test ('Tero' gets the values of 'George'):\n\n\033[0m";
+	st2 = st3;
+	st2.attack("Test");
 	std::cout << "-------------------------\n";
 }

@@ -52,10 +52,16 @@ int	main(void)
 
 	std::cout << "\033[1;32m\nTesting copy constructor (making a copy of 'Esko'): \n\n\033[0m";
 	ClapTrap copy(ct1);
+
+	std::cout << "\033[1;32m\nTrying to attack with the copy of Esko: \n\n\033[0m";
+
 	copy.attack("test");
 
-	std::cout << "\033[1;32m\nTesting copy assignment operator (copying data of 'Jorma' to copy): \n\n\033[0m";
+	std::cout << "\033[1;32m\nTesting copy assignment operator (copying values of 'Jorma' to the copy of'Esko'): \n\n\033[0m";
 	copy = ct2;
+
+	std::cout << "\033[1;32m\nTrying to attack after the copy assignment operator (Esko should now be Jorma): \n\n\033[0m";
+
 	copy.attack("test");
 
 	std::cout << "\n-------------------------\n";
